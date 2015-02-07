@@ -41,15 +41,23 @@ namespace csharpHitbox.client
                 var method = args.GetValue("method");
                 var paramsObject = args.GetValue("params");
 
+                // We don't care about buffer messages - Well, I don't.
+                if (paramsObject.SelectToken("buffer") != null) return;
+
                 switch (method.ToString())
                 {
                     case "loginMsg":
                         // Successfully authenticated
                         break;
                     case "chatMsg":
-                        if (paramsObject.SelectToken("buffer") != null) return;
-                        Bot.getLogger().Info("[chatMsg@" + client.GetChannel() + "] user=" + paramsObject.SelectToken("name") + " message=" + paramsObject.SelectToken("text")
-                            + " role=" + paramsObject.SelectToken("role"));
+                        String sender = paramsObject.SelectToken("name").ToString();
+                        String message = paramsObject.SelectToken("text").ToString();
+                        String rights = paramsObject.SelectToken("role").ToString();
+                        
+                        if (message.StartsWith("!") && message.Length > 1)
+                        {
+                            client.GetCommandHandler().Handle(sender, rights, message.Trim());
+                        }
                         break;
                     case "infoMsg":
                         break;

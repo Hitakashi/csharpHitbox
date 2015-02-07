@@ -63,7 +63,7 @@ namespace csharpHitbox.bot
                 Console.Error.WriteLine(e);
             }
         }
-        public void RemoveClient(String channel)
+        public static void RemoveClient(String channel)
         {
             if (Clients.ContainsKey(channel))
             {
@@ -87,6 +87,23 @@ namespace csharpHitbox.bot
                 catch (Exception ignored)
                 {
 
+                }
+            }
+        }
+
+        public static void RestartBot()
+        {
+            foreach (Client client in Clients.Values)
+            {
+                try
+                {
+                    client.GetMessageHandler().SendQuitMessage();
+                    RemoveClient(client.GetChannel());
+                    AddClient(client.GetChannel());
+                }
+                catch (Exception ignoredException)
+                {
+                    
                 }
             }
         }

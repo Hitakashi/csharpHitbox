@@ -77,7 +77,23 @@ namespace csharpHitbox.utils
             return null;
         }
 
+        public static int GetRightsForString(String rights)
+        {
+            switch (rights.ToLower())
+            {
+                case "user":
+                case "mod":
+                    return 1;
+                case "admin":
+                case "broadcaster":
+                    return 2;
+                default:
+                    return 0;
+            }
+        }
+
         #region API
+
         public static object Post(string url, string json)
         {
             try
@@ -175,6 +191,7 @@ namespace csharpHitbox.utils
                 }
             }
         }
+
         #endregion
     }
 }

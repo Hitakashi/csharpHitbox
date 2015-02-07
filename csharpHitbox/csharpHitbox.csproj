@@ -68,7 +68,11 @@
   <ItemGroup>
     <Compile Include="Boot.cs" />
     <Compile Include="client\Client.cs" />
+    <Compile Include="client\CommandHandler.cs" />
     <Compile Include="client\MessageHandler.cs" />
+    <Compile Include="commands\Command.cs" />
+    <Compile Include="commands\CommandData.cs" />
+    <Compile Include="commands\impl\HelloWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="bot\Bot.cs" />
     <Compile Include="Settings.cs">

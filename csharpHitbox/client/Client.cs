@@ -17,6 +17,7 @@ namespace csharpHitbox.client
         private String channel = null;
         private WebSocket _webSocket;
         private MessageHandler messageHandler;
+        private CommandHandler commandHandler;
 
         public Client(string channel)
         {
@@ -27,6 +28,7 @@ namespace csharpHitbox.client
             _webSocket.Error += _webSocket_Error;
             _webSocket.Closed += _webSocket_Closed;
             messageHandler = new MessageHandler(this);
+            commandHandler = new CommandHandler(this);
         }
 
         void _webSocket_Opened(object sender, EventArgs e)
@@ -68,6 +70,11 @@ namespace csharpHitbox.client
         public MessageHandler GetMessageHandler()
         {
             return messageHandler;
+        }
+
+        public CommandHandler GetCommandHandler()
+        {
+            return commandHandler;
         }
 
         public void Connect()
