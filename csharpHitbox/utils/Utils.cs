@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json.Linq;
@@ -11,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace csharpHitbox.utils
 {
-    public class Utils
+    public static class Utils
     {
         public static Boolean CheckSettings()
         {
@@ -74,5 +75,105 @@ namespace csharpHitbox.utils
             Environment.Exit(1);
             return null;
         }
+
+        #region API
+        public static object Post(string url, string json)
+        {
+            try
+            {
+                WebClient c = new WebClient();
+                var responseFromServer = c.UploadString(url, json);
+
+                c.Dispose();
+                return responseFromServer;
+            }
+            catch (WebException exception)
+            {
+                using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+                {
+                    var responseText = reader.ReadToEnd();
+                    return responseText;
+                }
+            }
+        }
+
+        public static void PostAync(string url, string json)
+        {
+            try
+            {
+                WebClient c = new WebClient();
+                Uri url2 = new Uri(url);
+                c.UploadStringAsync(url2, json);
+
+                c.Dispose();
+            }
+            catch (WebException exception)
+            {
+                using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+                {
+                }
+            }
+        }
+
+        public static object Put(string url, string json)
+        {
+            try
+            {
+                WebClient c = new WebClient();
+                var responseFromServer = c.UploadString(url, "PUT", json);
+
+                c.Dispose();
+                return responseFromServer;
+            }
+            catch (WebException exception)
+            {
+                using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+                {
+                    var responseText = reader.ReadToEnd();
+                    return responseText;
+                }
+            }
+        }
+
+        public static void PutAync(string url, string json)
+        {
+            try
+            {
+                WebClient c = new WebClient();
+                Uri url2 = new Uri(url);
+                c.UploadStringAsync(url2, "PUT", json);
+
+                c.Dispose();
+            }
+            catch (WebException exception)
+            {
+                using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+                {
+                }
+            }
+        }
+
+        public static object Get(string url)
+        {
+            try
+            {
+                WebClient c = new WebClient();
+
+                var responseFromServer = c.DownloadString(url);
+
+                c.Dispose();
+                //Trace.WriteLine(String.Format("GetApi Data: {0}", responseFromServer));
+                return responseFromServer;
+            }
+            catch (WebException exception)
+            {
+                using (var reader = new StreamReader(exception.Response.GetResponseStream()))
+                {
+                    var responseText = reader.ReadToEnd();
+                    return responseText;
+                }
+            }
+        }
+        #endregion
     }
 }

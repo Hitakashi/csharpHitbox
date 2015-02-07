@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
  * Version: 0.1
  */
 
-namespace csharpHitbox
+namespace csharpHitbox.client
 {
     public class MessageHandler
     {

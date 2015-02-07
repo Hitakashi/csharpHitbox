@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using csharpHitbox.bot;
 using csharpHitbox.utils;
 using WebSocket4Net;
 
@@ -10,7 +9,7 @@ using WebSocket4Net;
  * Version: 0.1
  */
 
-namespace csharpHitbox
+namespace csharpHitbox.client
 {
     public class Client
     {

@@ -11,7 +11,7 @@ using csharpHitbox.utils;
 
 namespace csharpHitbox
 {
-    class Boot
+    static class Boot
     {
         static ManualResetEvent _quitEvent = new ManualResetEvent(false);
 

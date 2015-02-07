@@ -8,9 +8,9 @@
 
 namespace csharpHitbox
 {
-    public class Settings
+    public static class Settings
     {
-        // Default Channel. You can change this to a string array and use something like a foreach on the Bot Constructor
+        // Default Channels
         public static String[] CHANNEL = {"Hitakashi"};
 
         // Bot Username & Password

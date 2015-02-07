@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using csharpHitbox.client;
 
 /**
  * Originally created by BitOBytes in Java
