@@ -51,7 +51,9 @@
     <Compile Include="client\MessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="bot\Bot.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Settings.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
