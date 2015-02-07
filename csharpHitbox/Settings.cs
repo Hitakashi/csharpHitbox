@@ -16,7 +16,7 @@ namespace csharpHitbox
         // Bot Username & Password
         public static String USERNAME = "";
         public static String PASSWORD = "";
-        public static String HEXCOLOR = "FF00FF";
+        public static String HEXCOLOR = "FF00FA";
 
         // Don't fill in
         public static String AUTH = "";
