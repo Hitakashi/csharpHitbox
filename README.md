@@ -11,3 +11,5 @@ I include both WebSocket4Net and NewtonSoft.Json, both of their licenses can be 
 http://websocket4net.codeplex.com/license
 
 https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
+
+https://github.com/NuGet/NuGet.CommandLine/blob/master/LICENSE
