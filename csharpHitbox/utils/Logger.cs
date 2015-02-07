@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+/**
+ * Originally created by BitOBytes in Java
+ * Converted to C# by Hitakashi
+ * Version: 0.1
+ */
 
 namespace csharpHitbox.utils
 {

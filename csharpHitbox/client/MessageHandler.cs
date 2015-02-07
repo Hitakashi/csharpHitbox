@@ -48,7 +48,7 @@ namespace csharpHitbox.client
                         break;
                     case "chatMsg":
                         if (paramsObject.SelectToken("buffer") != null) return;
-                        Bot.getLogger().Info("[chatMsg@" + client.GetChannel() + " user=" + paramsObject.SelectToken("name") + " message=" + paramsObject.SelectToken("text")
+                        Bot.getLogger().Info("[chatMsg@" + client.GetChannel() + "] user=" + paramsObject.SelectToken("name") + " message=" + paramsObject.SelectToken("text")
                             + " role=" + paramsObject.SelectToken("role"));
                         break;
                     case "infoMsg":
