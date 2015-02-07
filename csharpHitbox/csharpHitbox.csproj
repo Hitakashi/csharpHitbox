@@ -74,6 +74,7 @@
     <Compile Include="Settings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="utils\Logger.cs" />
     <Compile Include="utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

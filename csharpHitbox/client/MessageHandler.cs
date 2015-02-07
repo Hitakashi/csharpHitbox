@@ -32,7 +32,7 @@ namespace csharpHitbox.client
             {
                 // We've been kicked from the server.
                 Bot.Destroy();
-                Console.WriteLine("The server has terminated the connection.");
+                Bot.getLogger().Error("The server has terminated the connection.");
             }
             else if (data.StartsWith("5:::"))
             {
@@ -48,7 +48,8 @@ namespace csharpHitbox.client
                         break;
                     case "chatMsg":
                         if (paramsObject.SelectToken("buffer") != null) return;
-                        Console.WriteLine(paramsObject);
+                        Bot.getLogger().Info("[chatMsg@" + client.GetChannel() + " user=" + paramsObject.SelectToken("name") + " message=" + paramsObject.SelectToken("text")
+                            + " role=" + paramsObject.SelectToken("role"));
                         break;
                     case "infoMsg":
                         break;
@@ -98,8 +99,9 @@ namespace csharpHitbox.client
             sb.Append("\"token\":\"").Append(Settings.AUTH);
             sb.Append("\"}}]}");
 
-            Console.WriteLine(
+            Bot.getLogger().Info(
                 "[Client@" + client.GetChannel() + "] Sending join request...");
+
             client.Send(sb.ToString());
         }
 
@@ -112,7 +114,7 @@ namespace csharpHitbox.client
             sb.Append("\"name\":\"").Append(Settings.USERNAME).Append("\"");
             sb.Append("}}]}");
 
-            Console.WriteLine(
+            Bot.getLogger().Info(
                 "[Client@" + client.GetChannel() + "] Sending quit message...");
             client.Send(sb.ToString());
         }

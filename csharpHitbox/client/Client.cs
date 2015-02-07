@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using csharpHitbox.bot;
 using csharpHitbox.utils;
 using WebSocket4Net;
 
@@ -30,13 +31,16 @@ namespace csharpHitbox.client
 
         void _webSocket_Opened(object sender, EventArgs e)
         {
-            Debug.WriteLine("Opened");
+            Bot.getLogger().Info("[onOpen@" + channel + "]" + " Starting Connection");
             messageHandler.SendJoinRequest();
         }
 
         void _webSocket_Closed(object sender, EventArgs e)
         {
-            Debug.WriteLine("Closed: " + e);
+            Bot.getLogger().Info(
+                            "[onClose@" + channel + "] Closed Connection");
+            Bot.GetInstance().RestartClient(channel);
+
         }
 
         void _webSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
@@ -46,13 +50,14 @@ namespace csharpHitbox.client
 
         void _webSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
         {
-            Debug.WriteLine("Error: " + e.Exception);
+            Bot.getLogger().Error(
+                "[onError@" + channel + "] " + e.Exception);
         }
 
         public void Send(String data)
         {
             _webSocket.Send(data);
-            Console.WriteLine("[Send@" + channel + "] " + data);
+            Bot.getLogger().Info("[Send@" + channel + "] " + data);
         }
 
         public String GetChannel()

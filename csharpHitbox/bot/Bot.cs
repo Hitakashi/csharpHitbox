@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using csharpHitbox.client;
+using csharpHitbox.utils;
 
 /**
  * Originally created by BitOBytes in Java
@@ -13,6 +14,7 @@ namespace csharpHitbox.bot
     public class Bot
     {
         public static ConcurrentDictionary<String, Client> Clients = new ConcurrentDictionary<String, Client>();
+        public static Logger logger = new Logger();
         private static Bot instance;
 
         public Bot()
@@ -30,11 +32,21 @@ namespace csharpHitbox.bot
             return instance;
         }
 
-        public void AddClient(String channel)
+        public static Logger getLogger()
+        {
+            return logger;
+        }
+
+        public void RestartClient(String channel) {
+            RemoveClient(channel);
+            AddClient(channel);
+        }
+
+        public static void AddClient(String channel)
         {
             try
             {
-                Console.WriteLine("Creating Client@" + channel);
+                getLogger().Log("Creating Client@" + channel);
                 Client client = new Client(channel.ToLower());
                 Clients.TryAdd(channel.ToLower(), client);
                 try

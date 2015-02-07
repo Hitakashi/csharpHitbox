@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
+using csharpHitbox.bot;
 using Newtonsoft.Json.Linq;
 
 /**
@@ -24,7 +25,7 @@ namespace csharpHitbox.utils
                 Settings.WS_IP = FetchWsAddress();
                 return true;
             }
-            Console.WriteLine("FATAL: Something is missing from your configuration file.");
+            Bot.getLogger().Error("[SettingsCheck]: Failed. Something is missing from your configuration");
             return false;
         }
 

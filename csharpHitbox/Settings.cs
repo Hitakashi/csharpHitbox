@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 
 /**
  * Originally created by BitOBytes in Java
@@ -24,6 +25,8 @@ namespace csharpHitbox
 
         // Bot Admins, This isn't implemented in this 'example', but you can use this or something external...like a database.
         public static String[] ADMINS = { "CHANGEME" };
+
+        public static Boolean DEBUGGING = true;
 
         public static class Links
         {
