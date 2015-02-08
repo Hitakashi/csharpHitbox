@@ -54,6 +54,8 @@ namespace csharpHitbox.client
                         var message = paramsObject.SelectToken("text").ToString();
                         var rights = paramsObject.SelectToken("role").ToString();
 
+                        if (sender.ToLower().Equals(Settings.USERNAME.ToLower())) return;
+
                         if (message.StartsWith("!") && message.Length > 1)
                         {
                             client.GetCommandHandler().Handle(sender, rights, message.Trim());
