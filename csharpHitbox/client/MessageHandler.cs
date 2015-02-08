@@ -64,7 +64,7 @@ namespace csharpHitbox.client
                     case "chatLog":
                         break;
 
-                        #region List of other methods sent from the server
+                    #region List of other methods sent from the server
 
                     case "userList":
                         break;
@@ -91,7 +91,7 @@ namespace csharpHitbox.client
                         // Title or Game changed or host mode changed.
                         break;
 
-                        #endregion
+                    #endregion
 
                     default:
                         Bot.getLogger()
