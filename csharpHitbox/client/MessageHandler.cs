@@ -66,35 +66,36 @@ namespace csharpHitbox.client
 
                         #region List of other methods sent from the server
 
-                        //case "userList":
-                    //    break;
-                    //case "userInfo":
-                    //    break;
+                    case "userList":
+                        break;
+                    case "userInfo":
+                        break;
 
-                    //case "slowMsg":
-                    //    break;
+                    case "slowMsg":
+                        break;
 
-                    // // Raffle
-                    //case "raffleMsg":
-                    //    break;
-                    //case "winnerRaffle":
-                    //    break;
-                    //// Poll
-                    //case "pollMsg":
-                    //    break;
-                    //// MOTD
-                    //case "motdMsg":
-                    //    break;
+                    // Raffle
+                    case "raffleMsg":
+                        break;
+                    case "winnerRaffle":
+                        break;
+                    // Poll
+                    case "pollMsg":
+                        break;
+                    // MOTD
+                    case "motdMsg":
+                        break;
 
-                    //// Server Msg
-                    //case "serverMsg":
-                    //    // Title or Game changed or host mode changed.
-                    //    break;
+                    // Server Msg
+                    case "serverMsg":
+                        // Title or Game changed or host mode changed.
+                        break;
 
                         #endregion
 
                     default:
-                        Console.WriteLine(paramsObject);
+                        Bot.getLogger()
+                            .Info("Warning! Unknown command from server! Method: " + method + " Params: " + paramsObject);
                         break;
                 }
             }
@@ -277,6 +278,7 @@ namespace csharpHitbox.client
 
         #region Poll
 
+        // Max choices is 11
         public void SendCreatePoll(String question, String subscriber, String follower, params String[] choices)
         {
             var sb = new StringBuilder(BaseMessage);

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.NetworkInformation;
 
 /**
  * Originally created by BitOBytes in Java
