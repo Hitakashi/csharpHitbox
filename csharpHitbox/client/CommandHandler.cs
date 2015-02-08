@@ -12,16 +12,10 @@ using csharpHitbox.utils;
 
 namespace csharpHitbox.client
 {
-    public class CommandHandler
+    public static class CommandHandler
     {
-        private readonly Client client;
 
-        public CommandHandler(Client client)
-        {
-            this.client = client;
-        }
-
-        public void Handle(String sender, String rights, String data)
+        public static void Handle(Client client, String sender, String rights, String data)
         {
             string cmd, @params = "null";
 

@@ -16,8 +16,6 @@ namespace csharpHitbox.client
     {
         private String channel = null;
         private WebSocket _webSocket;
-        private MessageHandler messageHandler;
-        private CommandHandler commandHandler;
 
         public Client(string channel)
         {
@@ -27,14 +25,12 @@ namespace csharpHitbox.client
             _webSocket.MessageReceived += _webSocket_MessageReceived;
             _webSocket.Error += _webSocket_Error;
             _webSocket.Closed += _webSocket_Closed;
-            messageHandler = new MessageHandler(this);
-            commandHandler = new CommandHandler(this);
         }
 
         void _webSocket_Opened(object sender, EventArgs e)
         {
             Bot.getLogger().Info("[onOpen@" + channel + "]" + " Starting Connection");
-            messageHandler.SendJoinRequest();
+            MessageHandler.SendJoinRequest(this);
         }
 
         void _webSocket_Closed(object sender, EventArgs e)
@@ -47,7 +43,7 @@ namespace csharpHitbox.client
 
         void _webSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
-            messageHandler.handle(e.Message);
+            MessageHandler.handle(this, e.Message);
         }
 
         void _webSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
@@ -65,16 +61,6 @@ namespace csharpHitbox.client
         public String GetChannel()
         {
             return channel;
-        }
-
-        public MessageHandler GetMessageHandler()
-        {
-            return messageHandler;
-        }
-
-        public CommandHandler GetCommandHandler()
-        {
-            return commandHandler;
         }
 
         public void Connect()

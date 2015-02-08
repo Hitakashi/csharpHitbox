@@ -12,17 +12,11 @@ using Newtonsoft.Json.Linq;
 
 namespace csharpHitbox.client
 {
-    public class MessageHandler
+    public static class MessageHandler
     {
         private const String BaseMessage = "5:::{\"name\":\"message\",\"args\":[{";
-        private readonly Client client;
 
-        public MessageHandler(Client client)
-        {
-            this.client = client;
-        }
-
-        public void handle(String data)
+        public static void handle(Client client, String data)
         {
             if (data.Equals("2::"))
             {
@@ -54,11 +48,11 @@ namespace csharpHitbox.client
                         var message = paramsObject.SelectToken("text").ToString();
                         var rights = paramsObject.SelectToken("role").ToString();
 
-                        if (sender.ToLower().Equals(Settings.USERNAME.ToLower())) return;
+                        //if (sender.ToLower().Equals(Settings.USERNAME.ToLower())) return;
 
                         if (message.StartsWith("!") && message.Length > 1)
                         {
-                            client.GetCommandHandler().Handle(sender, rights, message.Trim());
+                            CommandHandler.Handle(client, sender, rights, message.Trim());
                         }
                         break;
                     case "infoMsg":
@@ -105,7 +99,7 @@ namespace csharpHitbox.client
 
         #region Connection
 
-        public void SendJoinRequest()
+        public static void SendJoinRequest(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":\"joinChannel\",");
@@ -121,7 +115,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendQuitMessage()
+        public static void SendQuitMessage(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":\"partChannel\",");
@@ -139,7 +133,7 @@ namespace csharpHitbox.client
 
         #region General
 
-        public void SendMessage(String msg)
+        public static void SendMessage(Client client, String msg)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":\"chatMsg\",");
@@ -153,7 +147,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendUserInfoRequest(String user)
+        public static void SendUserInfoRequest(Client client, String user)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"getChannelUser\",");
@@ -165,7 +159,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendUserListRequest()
+        public static void SendUserListRequest(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"getChannelUserList\",");
@@ -181,7 +175,7 @@ namespace csharpHitbox.client
         #region Giveaway
 
         // Max Choices is 11
-        public void SendCreateRaffle(String question, String prize, string subscriber, string follower,
+        public static void SendCreateRaffle(Client client, String question, String prize, string subscriber, string follower,
             params String[] choices)
         {
             var sb = new StringBuilder(BaseMessage);
@@ -209,7 +203,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendPauseRaffle()
+        public static void SendPauseRaffle(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"pauseRaffle\",");
@@ -220,7 +214,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendEndRaffle()
+        public static void SendEndRaffle(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"endRaffle\",");
@@ -231,7 +225,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendStartRaffle()
+        public static void SendStartRaffle(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"startRaffle\",");
@@ -242,7 +236,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendHideRaffle()
+        public static void SendHideRaffle(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"hideRaffle\",");
@@ -253,7 +247,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendCleanupRaffle()
+        public static void SendCleanupRaffle(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"cleanupRaffle\",");
@@ -265,7 +259,7 @@ namespace csharpHitbox.client
         }
 
         // Winner must be a number as a string. Winning answer starts at 0.
-        public void SendPickWinner(String winner)
+        public static void SendPickWinner(Client client, String winner)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"winnerRaffle\",");
@@ -281,7 +275,7 @@ namespace csharpHitbox.client
         #region Poll
 
         // Max choices is 11
-        public void SendCreatePoll(String question, String subscriber, String follower, params String[] choices)
+        public static void SendCreatePoll(Client client, String question, String subscriber, String follower, params String[] choices)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"createPoll\",");
@@ -307,7 +301,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendPausePoll()
+        public static void SendPausePoll(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"pausePoll\",");
@@ -319,7 +313,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendStartPoll()
+        public static void SendStartPoll(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"startPoll\",");
@@ -331,7 +325,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendEndPoll()
+        public static void SendEndPoll(Client client)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"endPoll\",");
@@ -347,7 +341,7 @@ namespace csharpHitbox.client
 
         #region Moderation
 
-        public void SendKickUser(String user, int time)
+        public static void SendKickUser(Client client, String user, int time)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"kickUser\",");
@@ -361,7 +355,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendBanUser(String user)
+        public static void SendBanUser(Client client, String user)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"banUser\",");
@@ -373,7 +367,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendUnBanUser(String user)
+        public static void SendUnBanUser(Client client, String user)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"unbanUser\",");
@@ -386,7 +380,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendSlowMode(int time)
+        public static void SendSlowMode(Client client, int time)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"unbanUser\",");
@@ -398,7 +392,7 @@ namespace csharpHitbox.client
             client.Send(sb.ToString());
         }
 
-        public void SendSubOnlyMode(String toggle)
+        public static void SendSubOnlyMode(Client client, String toggle)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"unbanUser\",");
@@ -414,7 +408,7 @@ namespace csharpHitbox.client
 
         #region MOTD
 
-        public void SendMotd(String text)
+        public static void SendMotd(Client client, String text)
         {
             var sb = new StringBuilder(BaseMessage);
             sb.Append("\"method\":").Append("\"motdMsg\",");

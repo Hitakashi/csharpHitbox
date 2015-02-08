@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using csharpHitbox.client;
 using csharpHitbox.utils;
 
@@ -69,7 +70,7 @@ namespace csharpHitbox.bot
             {
                 Client c;
                 Clients.TryGetValue(channel, out c);
-                if (c != null) c.GetMessageHandler().SendQuitMessage();
+                if (c != null) MessageHandler.SendQuitMessage(c);
                 if (c != null) c.Close();
                 Clients.TryRemove(channel, out c);
             }
@@ -81,7 +82,7 @@ namespace csharpHitbox.bot
             {
                 try
                 {
-                    client.GetMessageHandler().SendQuitMessage();
+                    MessageHandler.SendQuitMessage(client);
                     client.Close();
                 }
                 catch (Exception ignored)
@@ -97,7 +98,7 @@ namespace csharpHitbox.bot
             {
                 try
                 {
-                    client.GetMessageHandler().SendQuitMessage();
+                    MessageHandler.SendQuitMessage(client);
                     RemoveClient(client.GetChannel());
                     AddClient(client.GetChannel());
                 }

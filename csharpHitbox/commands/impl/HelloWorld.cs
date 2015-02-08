@@ -13,7 +13,7 @@ namespace csharpHitbox.commands.impl
         public override void Execute(Client client, int rights, string sender, string @params)
         {
             if (rights < Rights.USER) return;
-            client.GetMessageHandler().SendMessage("Hello World!");
+            MessageHandler.SendMessage(client, "Hello World!");
         }
     }
 }
