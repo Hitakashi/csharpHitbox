@@ -14,7 +14,7 @@ namespace csharpHitbox.client
 {
     public class CommandHandler
     {
-        private Client client;
+        private readonly Client client;
 
         public CommandHandler(Client client)
         {
@@ -35,7 +35,7 @@ namespace csharpHitbox.client
                 cmd = data.Substring(1);
             }
 
-            StringBuilder infoBuilder = new StringBuilder();
+            var infoBuilder = new StringBuilder();
             infoBuilder.Append("[CommandHandler@").Append(client.GetChannel()).Append("] ");
             infoBuilder.Append("cmd=[").Append(cmd).Append("],");
             infoBuilder.Append("params=[").Append(@params).Append("],");
@@ -53,7 +53,6 @@ namespace csharpHitbox.client
                     Console.WriteLine("Unknown Command: " + cmd.ToLower());
                     break;
             }
-
         }
     }
 }
