@@ -383,7 +383,7 @@ namespace csharpHitbox.client
         public static void SendSlowMode(Client client, int time)
         {
             var sb = new StringBuilder(BaseMessage);
-            sb.Append("\"method\":").Append("\"unbanUser\",");
+            sb.Append("\"method\":").Append("\"slowMode\",");
             sb.Append("\"params\":{");
             sb.Append("\"channel\":").Append("\"").Append(client.GetChannel()).Append("\",");
             sb.Append("\"time\":").Append(time);
@@ -395,7 +395,7 @@ namespace csharpHitbox.client
         public static void SendSubOnlyMode(Client client, String toggle)
         {
             var sb = new StringBuilder(BaseMessage);
-            sb.Append("\"method\":").Append("\"unbanUser\",");
+            sb.Append("\"method\":").Append("\"slowMode\",");
             sb.Append("\"params\":{");
             sb.Append("\"channel\":").Append("\"").Append(client.GetChannel()).Append("\",");
             sb.Append("\"subscriber\":").Append(toggle);
