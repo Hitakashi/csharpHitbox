@@ -27,6 +27,8 @@ namespace csharpHitbox
 
         public static Boolean DEBUGGING = true;
 
+        public static Boolean APISERVER = true;
+
         public static class Links
         {
             public static String WS_CON = "ws://" + WS_IP + "/socket.io/1/websocket/";
