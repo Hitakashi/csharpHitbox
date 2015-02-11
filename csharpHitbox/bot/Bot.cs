@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
+using csharpHitbox.api;
 using csharpHitbox.client;
 using csharpHitbox.utils;
 
@@ -33,11 +33,6 @@ namespace csharpHitbox.bot
             return instance;
         }
 
-        public static Logger getLogger()
-        {
-            return logger;
-        }
-
         public void RestartClient(String channel) {
             RemoveClient(channel);
             AddClient(channel);
@@ -47,12 +42,22 @@ namespace csharpHitbox.bot
         {
             try
             {
-                getLogger().Log("Creating Client@" + channel);
+                Logger.Log("Creating Client@" + channel);
                 Client client = new Client(channel.ToLower());
                 Clients.TryAdd(channel.ToLower(), client);
                 try
                 {
                     client.Connect();
+                    //if (httpServer != null) return;
+                    //httpServer = new MyHttpServer(80);
+                    
+                    //Thread thread = new Thread((httpServer.listen));
+                    //thread.Start();
+                    
+                    //httpServer = new Listener();
+                    if (Settings.APISERVER)
+                        Program.Main();
+
                 }
                 catch (Exception e)
                 {

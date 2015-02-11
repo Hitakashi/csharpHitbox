@@ -29,13 +29,13 @@ namespace csharpHitbox.client
 
         void _webSocket_Opened(object sender, EventArgs e)
         {
-            Bot.getLogger().Info("[onOpen@" + channel + "]" + " Starting Connection");
+            Logger.Info("[onOpen@" + channel + "]" + " Starting Connection");
             MessageHandler.SendJoinRequest(this);
         }
 
         void _webSocket_Closed(object sender, EventArgs e)
         {
-            Bot.getLogger().Info(
+            Logger.Info(
                             "[onClose@" + channel + "] Closed Connection");
             Bot.GetInstance().RestartClient(channel);
 
@@ -48,14 +48,14 @@ namespace csharpHitbox.client
 
         void _webSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
         {
-            Bot.getLogger().Error(
+            Logger.Error(
                 "[onError@" + channel + "] " + e.Exception);
         }
 
         public void Send(String data)
         {
             _webSocket.Send(data);
-            Bot.getLogger().Info("[Send@" + channel + "] " + data);
+            Logger.Info("[Send@" + channel + "] " + data);
         }
 
         public String GetChannel()

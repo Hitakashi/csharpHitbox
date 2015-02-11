@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using csharpHitbox.bot;
+using csharpHitbox.utils;
 using Newtonsoft.Json.Linq;
 
 /**
@@ -26,7 +27,7 @@ namespace csharpHitbox.client
             {
                 // We've been kicked from the server.
                 Bot.Destroy();
-                Bot.getLogger().Error("The server has terminated the connection.");
+                Logger.Error("The server has terminated the connection.");
             }
             else if (data.StartsWith("5:::"))
             {
@@ -90,7 +91,7 @@ namespace csharpHitbox.client
                     #endregion
 
                     default:
-                        Bot.getLogger()
+                        Logger
                             .Info("Warning! Unknown command from server! Method: " + method + " Params: " + paramsObject);
                         break;
                 }
@@ -109,7 +110,7 @@ namespace csharpHitbox.client
             sb.Append("\"token\":\"").Append(Settings.AUTH);
             sb.Append("\"}}]}");
 
-            Bot.getLogger().Info(
+            Logger.Info(
                 "[Client@" + client.GetChannel() + "] Sending join request...");
 
             client.Send(sb.ToString());
@@ -124,7 +125,7 @@ namespace csharpHitbox.client
             sb.Append("\"name\":\"").Append(Settings.USERNAME).Append("\"");
             sb.Append("}}]}");
 
-            Bot.getLogger().Info(
+            Logger.Info(
                 "[Client@" + client.GetChannel() + "] Sending quit message...");
             client.Send(sb.ToString());
         }

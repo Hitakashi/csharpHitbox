@@ -25,7 +25,7 @@ namespace csharpHitbox.utils
                 Settings.WS_IP = FetchWsAddress();
                 return true;
             }
-            Bot.getLogger().Error("[SettingsCheck]: Failed. Something is missing from your configuration");
+            Logger.Error("[SettingsCheck]: Failed. Something is missing from your configuration");
             return false;
         }
 

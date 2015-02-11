@@ -40,7 +40,7 @@ namespace csharpHitbox.client
             infoBuilder.Append("user=[name=[").Append(sender).Append("],rights=[");
             infoBuilder.Append(Utils.GetRightsForString(rights)).Append("]]");
 
-            Bot.getLogger().Info(infoBuilder.ToString());
+            Logger.Info(infoBuilder.ToString());
 
             switch (cmd.ToLower())
             {
