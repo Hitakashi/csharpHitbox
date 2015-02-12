@@ -79,6 +79,7 @@
     <Compile Include="api\ExampleSetting.cs" />
     <Compile Include="api\Root.cs" />
     <Compile Include="api\Server.cs" />
+    <Compile Include="api\SettingModule.cs" />
     <Compile Include="Boot.cs" />
     <Compile Include="client\Client.cs" />
     <Compile Include="client\CommandHandler.cs" />
