@@ -25,6 +25,8 @@ namespace csharpHitbox.bot
             {
                 AddClient(channel);
             }
+            if (Settings.APISERVER)
+                Program.Main();
         }
 
         public static Bot GetInstance()
@@ -59,8 +61,6 @@ namespace csharpHitbox.bot
                     //thread.Start();
                     
                     //httpServer = new Listener();
-                    if (Settings.APISERVER)
-                        Program.Main();
 
                 }
                 catch (Exception e)

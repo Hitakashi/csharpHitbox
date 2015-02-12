@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Text;
 using csharpHitbox.bot;
 using Nancy;
@@ -10,6 +11,10 @@ namespace csharpHitbox.api
 {
     public static class Program
     {
+        private static readonly Uri uri = new Uri("http://localhost:80/");
+        private static readonly HostConfiguration config = new HostConfiguration { RewriteLocalhost = true };
+        private static readonly NancyHost host = new NancyHost(config, uri);
+
         // The name for these variable will show in the API.
         public static Dictionary<string, string> settings = new Dictionary<string, string>();
 
@@ -18,6 +23,9 @@ namespace csharpHitbox.api
             try
             {
                 host.Start();
+                if (Settings.DEBUGGING)
+                    StaticConfiguration.DisableErrorTraces = false;
+
                 Console.WriteLine("API Server is running.");
             }
             catch (AutomaticUrlReservationCreationFailureException)
@@ -33,11 +41,13 @@ namespace csharpHitbox.api
                         NetSh.AddUrlAcl(uri.OriginalString, "Everyone");
                     }
                     host.Start();
+                    Console.WriteLine("API Server is running.");
                 }
-                else
-                {
-                    Console.WriteLine("Non-Windows System found. Please restart with elevated permissions.");
-                }
+            }
+            catch (SocketException)
+            {
+                // Need to capture a SocketException for Linux/MacOSX if the program isn't ran with sudo
+                Console.WriteLine("Linux/OSX: Program must be ran with mono due to using port 80.");
             }
         }
 
@@ -67,10 +77,6 @@ namespace csharpHitbox.api
 
             return json;
         }
-
-        private static readonly Uri uri = new Uri("http://localhost:80/");
-        private static readonly HostConfiguration config = new HostConfiguration {RewriteLocalhost = true};
-        private static readonly NancyHost host = new NancyHost(config, uri);
     }
 
     public class IndexModule : NancyModule
