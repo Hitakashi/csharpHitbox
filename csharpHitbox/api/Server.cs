@@ -9,14 +9,11 @@ using Nancy.Json;
 
 namespace csharpHitbox.api
 {
-    public static class Program
+    public static class ApiServer
     {
         private static readonly Uri uri = new Uri("http://localhost:80/");
-        private static readonly HostConfiguration config = new HostConfiguration { RewriteLocalhost = true };
+        private static readonly HostConfiguration config = new HostConfiguration {RewriteLocalhost = true};
         private static readonly NancyHost host = new NancyHost(config, uri);
-
-        // The name for these variable will show in the API.
-        public static Dictionary<string, string> settings = new Dictionary<string, string>();
 
         public static void Main()
         {
@@ -51,6 +48,7 @@ namespace csharpHitbox.api
             }
         }
 
+
         public static string ListChannels()
         {
             var json = new JavaScriptSerializer().Serialize(new
@@ -72,7 +70,10 @@ namespace csharpHitbox.api
                 {
                     name = channel
                 },
-                settings
+                settings = new
+                {
+                    linkBan = ExampleSetting.GetLinkSetting(channel)
+                }
             });
 
             return json;
@@ -85,7 +86,7 @@ namespace csharpHitbox.api
         {
             Get["/channel/{channel}"] = _ =>
             {
-                var json = Encoding.UTF8.GetBytes(Program.GetChannelSettings(_.channel));
+                var json = Encoding.UTF8.GetBytes(ApiServer.GetChannelSettings(_.channel));
                 var re = new Response
                 {
                     ContentType = "application/json",
@@ -100,7 +101,7 @@ namespace csharpHitbox.api
 
             Get["/channel/count"] = _ =>
             {
-                var jsonBytes = Encoding.UTF8.GetBytes(Program.ListChannels());
+                var jsonBytes = Encoding.UTF8.GetBytes(ApiServer.ListChannels());
                 return new Response
                 {
                     ContentType = "application/json",

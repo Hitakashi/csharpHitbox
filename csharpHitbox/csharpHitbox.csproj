@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\ExampleSetting.cs" />
     <Compile Include="api\Root.cs" />
     <Compile Include="api\Server.cs" />
     <Compile Include="Boot.cs" />

@@ -26,7 +26,7 @@ namespace csharpHitbox.bot
                 AddClient(channel);
             }
             if (Settings.APISERVER)
-                Program.Main();
+                ApiServer.Main();
         }
 
         public static Bot GetInstance()
@@ -101,7 +101,7 @@ namespace csharpHitbox.bot
 
                         //httpServer = new Listener();
                         if (Settings.APISERVER)
-                            Program.Main();
+                            ApiServer.Main();
 
                     }
                     catch (Exception e)
