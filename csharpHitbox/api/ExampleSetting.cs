@@ -26,5 +26,10 @@ namespace csharpHitbox.api
             linkBan.TryGetValue(channel, out a);
             return a;
         }
+
+        public static void UpdateLinkSetting(String channel, Boolean val)
+        {
+            linkBan[channel] = val;
+        }
     }
 }

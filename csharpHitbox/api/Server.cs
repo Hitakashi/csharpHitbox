@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
-using csharpHitbox.bot;
 using Nancy;
 using Nancy.Hosting.Self;
-using Nancy.Json;
 
 namespace csharpHitbox.api
 {
@@ -46,6 +43,16 @@ namespace csharpHitbox.api
                 // Need to capture a SocketException for Linux/MacOSX if the program isn't ran with sudo
                 Console.WriteLine("Linux/OSX: Program must be ran with mono due to using port 80.");
             }
+        }
+
+        public static Response NotFound()
+        {
+            var jsonNotFound = Encoding.UTF8.GetBytes("\"status\":\"Channel Not Found\"");
+            return new Response
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                Contents = s => s.Write(jsonNotFound, 0, jsonNotFound.Length)
+            };
         }
     }
 }
