@@ -61,7 +61,6 @@ namespace csharpHitbox.bot
                     //thread.Start();
                     
                     //httpServer = new Listener();
-
                 }
                 catch (Exception e)
                 {
@@ -100,9 +99,6 @@ namespace csharpHitbox.bot
                         //thread.Start();
 
                         //httpServer = new Listener();
-                        if (Settings.APISERVER)
-                            ApiServer.Main();
-
                     }
                     catch (Exception e)
                     {
