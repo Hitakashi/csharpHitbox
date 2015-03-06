@@ -19,7 +19,7 @@ namespace csharpHitbox.bot
         private static Bot instance;
         private static Boolean canJoin = true;
 
-        public Bot()
+        private Bot()
         {
             foreach (var channel in Settings.CHANNEL)
             {
@@ -54,13 +54,6 @@ namespace csharpHitbox.bot
                 try
                 {
                     client.Connect();
-                    //if (httpServer != null) return;
-                    //httpServer = new MyHttpServer(80);
-                    
-                    //Thread thread = new Thread((httpServer.listen));
-                    //thread.Start();
-                    
-                    //httpServer = new Listener();
                 }
                 catch (Exception e)
                 {
@@ -92,13 +85,6 @@ namespace csharpHitbox.bot
                     try
                     {
                         client.Connect();
-                        //if (httpServer != null) return;
-                        //httpServer = new MyHttpServer(80);
-
-                        //Thread thread = new Thread((httpServer.listen));
-                        //thread.Start();
-
-                        //httpServer = new Listener();
                     }
                     catch (Exception e)
                     {
@@ -162,8 +148,6 @@ namespace csharpHitbox.bot
                     
                 }
             }
-
-            // Add
 
             // Now we need to loop the copy of Clients and add them back.
 

@@ -14,13 +14,13 @@ namespace csharpHitbox.client
 {
     public class Client
     {
-        private String channel = null;
+        private String _channel = null;
         private WebSocket _webSocket;
 
         public Client(string channel)
         {
             _webSocket = new WebSocket(Settings.Links.WS_CON + Utils.FetchWsAuth());
-            this.channel = channel;
+            _channel = channel;
             _webSocket.Opened += _webSocket_Opened;
             _webSocket.MessageReceived += _webSocket_MessageReceived;
             _webSocket.Error += _webSocket_Error;
@@ -29,15 +29,15 @@ namespace csharpHitbox.client
 
         void _webSocket_Opened(object sender, EventArgs e)
         {
-            Logger.Info("[onOpen@" + channel + "]" + " Starting Connection");
+            Logger.Info("[onOpen@" + _channel + "]" + " Starting Connection");
             MessageHandler.SendJoinRequest(this);
         }
 
         void _webSocket_Closed(object sender, EventArgs e)
         {
             Logger.Info(
-                            "[onClose@" + channel + "] Closed Connection");
-            Bot.GetInstance().RestartClient(channel);
+                            "[onClose@" + _channel + "] Closed Connection");
+            Bot.GetInstance().RestartClient(_channel);
 
         }
 
@@ -49,18 +49,18 @@ namespace csharpHitbox.client
         void _webSocket_Error(object sender, SuperSocket.ClientEngine.ErrorEventArgs e)
         {
             Logger.Error(
-                "[onError@" + channel + "] " + e.Exception);
+                "[onError@" + _channel + "] " + e.Exception);
         }
 
         public void Send(String data)
         {
             _webSocket.Send(data);
-            Logger.Info("[Send@" + channel + "] " + data);
+            Logger.Info("[Send@" + _channel + "] " + data);
         }
 
         public String GetChannel()
         {
-            return channel;
+            return _channel;
         }
 
         public void Connect()

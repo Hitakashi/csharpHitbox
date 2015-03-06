@@ -8,12 +8,12 @@
 
 namespace csharpHitbox.commands.impl
 {
-    public class HelloWorld : Command
+    public static class HelloWorld
     {
-        public override void Execute(Client client, int rights, string sender, string @params)
+        public static void Execute(Client client, int rights, string sender, string @params, bool sub, bool follow)
         {
-            if (rights < Rights.USER) return;
-            MessageHandler.SendMessage(client, "Hello World!");
+            if (rights < Rights.User) return;
+            MessageHandler.SendMessage(client, "Hello World! Subscriber? " + sub + " Follower? " + follow);
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 using csharpHitbox.bot;
 using Newtonsoft.Json.Linq;
@@ -91,6 +94,19 @@ namespace csharpHitbox.utils
                     return 0;
             }
         }
+
+        public static String StripCommandData(String data)
+        {
+            List<Regex> reg = new List<Regex>();
+            reg.Add(new Regex("<a [^\\s]+ [^\\s>]+>([^<]+)</a>", RegexOptions.IgnoreCase));
+            reg.Add(new Regex("<div class=\"image\"><img src=\"([^\"]+)\" /></div>", RegexOptions.IgnoreCase));
+            reg.Add(new Regex("<div class=\"video\">[^/]+([^\"]+)[^>]+>[^>]+>[^>]+>[^>]+>", RegexOptions.IgnoreCase));
+
+            data = reg.Aggregate(data, (current, variable) => variable.Replace(current, "$1"));
+            data = data.Replace("//www.youtube.com/embed/", "https://www.youtube.com/watch?v=");
+            return data;
+        }
+
 
         #region API
 
