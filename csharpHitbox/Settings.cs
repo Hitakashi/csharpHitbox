@@ -26,8 +26,10 @@ namespace csharpHitbox
         public static String[] ADMINS = { "CHANGEME" };
 
         public static Boolean DEBUGGING = true;
-
-        public static Boolean APISERVER = true;
+        
+        // Setting this to true will require admin elevation to add a urlacl for Windows.
+        // You MAY have to run as su/sudo in Linux with Mono. Testing that soon.
+        public static Boolean APISERVER = false;
 
         public static class Links
         {
