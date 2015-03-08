@@ -32,6 +32,7 @@ namespace csharpHitbox.utils
                 {
                     Settings.USERNAME = Environment.GetEnvironmentVariable("username");
                     Settings.PASSWORD = Environment.GetEnvironmentVariable("password");
+                    return true;
                 }
             } else if (Settings.CHANNEL.Length != 0
                 && !Settings.USERNAME.Equals("", StringComparison.OrdinalIgnoreCase)
