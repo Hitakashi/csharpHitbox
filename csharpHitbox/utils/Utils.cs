@@ -20,9 +20,20 @@ namespace csharpHitbox.utils
     {
         public static Boolean CheckSettings()
         {
-            if (Settings.CHANNEL.Length != 0
-                && !Settings.USERNAME.Equals("", StringComparison.CurrentCultureIgnoreCase)
-                && !Settings.PASSWORD.Equals("", StringComparison.CurrentCultureIgnoreCase))
+            if (Environment.GetEnvironmentVariable("platform") == "heroku")
+            {
+                String c = Environment.GetEnvironmentVariable("username");
+                String p = Environment.GetEnvironmentVariable("pasword");
+                if (c != null && p != null &&
+                    (!c.Equals("", StringComparison.OrdinalIgnoreCase) ||
+                     !p.Equals("", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Settings.USERNAME = Environment.GetEnvironmentVariable("username");
+                    Settings.PASSWORD = Environment.GetEnvironmentVariable("password");
+                }
+            } else if (Settings.CHANNEL.Length != 0
+                && !Settings.USERNAME.Equals("", StringComparison.OrdinalIgnoreCase)
+                && !Settings.PASSWORD.Equals("", StringComparison.OrdinalIgnoreCase))
             {
                 Settings.AUTH = FetchAuth();
                 Settings.WS_IP = FetchWsAddress();
