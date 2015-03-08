@@ -20,6 +20,8 @@ namespace csharpHitbox.utils
     {
         public static Boolean CheckSettings()
         {
+            Console.WriteLine(Environment.GetEnvironmentVariable("platform"));
+            Console.WriteLine(Environment.GetEnvironmentVariable("username"));
             if (Environment.GetEnvironmentVariable("platform") == "heroku")
             {
                 String c = Environment.GetEnvironmentVariable("username");
